@@ -25,11 +25,6 @@ class EntryListTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -49,7 +44,7 @@ class EntryListTableViewController: UITableViewController {
         let entry = EntryController.sharedInstance.entriesArray[indexPath.row]
         
         cell.textLabel?.text = entry.title
-        cell.detailTextLabel?.text = entry.timestamp
+        cell.detailTextLabel?.text = String(entry.timeStamp)
         
 
         return cell
@@ -68,9 +63,15 @@ class EntryListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            let entry = EntryController.sharedInstance.entriesArray[indexPath.row]
+            
+            EntryController.sharedInstance.removeEntry(entry)
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+
+           
+//        } else if editingStyle == .Insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
 

@@ -26,11 +26,6 @@ class EntryDetailViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -39,7 +34,7 @@ class EntryDetailViewController: UIViewController, UITextFieldDelegate {
     
     func updateWithEntry(entry: Entry) {
         self.titleTextField.text = entry.title
-        self.bodyTextView.text = entry.bodyText
+        self.bodyTextView.text = entry.text
     }
     
     
@@ -51,7 +46,7 @@ class EntryDetailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveButtonTapped(sender: AnyObject) {
         
         if let entryTitle = titleTextField.text, entryBodyText = bodyTextView.text {
-            EntryController.sharedInstance.addEntry(Entry(timestamp: String(NSDate), title: entryTitle, bodyText: entryBodyText))
+            EntryController.sharedInstance.addEntry(Entry(title: entryTitle, text: entryBodyText))
         }
         
         self.navigationController?.popToRootViewControllerAnimated(true)
